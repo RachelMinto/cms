@@ -1,1 +1,0 @@
-Ruby is a programming language. It is great for beginners.

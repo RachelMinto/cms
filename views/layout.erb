@@ -1,2 +1,5 @@
+<% if session[:message] %>
+  <%= session.delete(:message) %>
+<% end %>
 
 <%= yield %>
