@@ -28,7 +28,7 @@ def load_file_content(path)
     headers["Content-Type"] = "text/plain"
     content
   when ".md"
-    render_markdown(content)
+    erb render_markdown(content)
   end
 end
 
@@ -38,6 +38,23 @@ get "/" do
     File.basename(path)
   end
   erb :index
+end
+
+get "/new" do
+  erb :new
+end
+
+post "/create" do
+  if filename == ""
+    session[:message] = "A name is required."
+    redirect "/new"
+  else
+    file_path = File.join(params[:new_file])
+    File.write(file_path)
+
+    session[:message] = "#{params[:new_file]} has been created."
+    redirect "/"
+  end
 end
 
 get "/:filename" do
